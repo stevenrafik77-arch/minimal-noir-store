@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MINIMAL | Black Luxury</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased">
+    <div class="ambient-bg"></div>
+    <div id="custom-cursor"></div>
+
+
+    <!-- 1. Side Shopping Cart -->
+    <div id="cartSidebar" class="fixed inset-0 z-[100] invisible">
+        <div id="cartOverlay" class="absolute inset-0 bg-white/5 backdrop-blur-md opacity-0 transition-opacity duration-500 cursor-pointer"></div>
+        <div id="cartPanel" class="absolute right-0 top-0 h-full w-full max-w-md bg-[#050505] border-l border-white/10 shadow-2xl translate-x-[100%] transition-transform duration-500 flex flex-col">
+            <div class="p-8 border-b border-white/5 flex justify-between items-center">
+                <h2 class="text-xl font-bold uppercase tracking-widest">Shopping Cart</h2>
+                <button onclick="toggleCart()" class="text-gray-500 hover:text-white transition-soft">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <div id="cartItems" class="flex-1 overflow-y-auto p-8 space-y-6">
+                <p id="emptyMessage" class="text-center text-gray-600 mt-20 italic">Your cart is currently empty..</p>
+            </div>
+            <div class="p-8 border-t border-white/5 bg-[#080808] space-y-6">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-400 text-xs tracking-widest">Total</span>
+                    <span id="cartTotal" class="text-xl font-bold">0 SAR</span>
+                </div>
+                <button onclick="goToCheckout()" 
+                        class="glow-button w-full bg-white text-black py-5 text-xs font-bold uppercase tracking-[0.3em]">
+                    Checkout
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Header (Navigation) -->
+    <header class="fixed w-full top-0 z-50 bg-black/90 backdrop-blur-lg border-b border-white/5">
+        <div class="container mx-auto px-8 py-6 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold tracking-tighter uppercase">Minimal.</a>
+            <nav id="navLinks" class="hidden md:flex space-x-12 text-[10px] font-bold uppercase tracking-[0.2em]">
+                <a href="#" id="nav-home" class="active-link glow-text transition-soft">Home</a>
+                <a href="#products" id="nav-products" class="glow-text transition-soft">Shop</a>
+                <a href="about-us.html" class="glow-text transition-soft">About Us</a>
+            </nav>
+
+            <div onclick="toggleCart()" class="relative cursor-pointer group flex items-center bg-white/5 px-4 py-2 rounded-full border border-white/10 hover:border-white/30 transition-all">
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="1.2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+                <span id="cartCountLabel" class="ml-2 text-xs font-bold">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. Hero Section -->
+    <section class="h-screen flex items-center justify-center relative overflow-hidden bg-black">
+        <div class="absolute w-[600px] h-[600px] bg-white/5 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <h1 class="text-6xl md:text-9xl font-bold leading-tight uppercase mb-10 tracking-tighter">Essential <span class="text-gray-600 italic font-light">Noir</span></h1>
+            <p class="text-gray-500 max-w-lg mx-auto mb-12 text-sm leading-loose">Designs that reflect strength in simplicity. Discover the essence of dark elegance in our new collection.</p>
+            <a href="#products" class="glow-button inline-block bg-white text-black px-14 py-5 text-[10px] font-bold uppercase tracking-[0.4em]">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- 4. Product Gallery -->
+    <section id="products" class="py-32 bg-black">
+        <div class="container mx-auto px-8">
+            <h2 class="text-center text-xs uppercase tracking-[0.6em] text-gray-500 mb-20">Selected Collection</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                
+                <div class="group product-card">
+                    <div class="aspect-[3/4] bg-[#080808] overflow-hidden mb-6 relative border border-white/5 group-hover:border-white/20 transition-all">
+                        <img src="https://images.unsplash.com/photo-1499971856191-1a420a42b498?q=80&w=381&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                            class="product-img w-full h-full object-cover grayscale brightness-50 group-hover:brightness-100 group-hover:grayscale-0 transition-all duration-700">
+                        
+                        <button onclick="addToCart(this, 'Classic Noir Shirt', 280)" 
+                                class="glow-button absolute bottom-0 w-full bg-white text-black py-5 text-[10px] font-bold uppercase opacity-0 translate-y-6 group-hover:opacity-100 group-hover:translate-y-0 transition-all">
+                            Add to Cart +
+                        </button>
+                    </div>
+                    <div class="flex justify-between items-start px-2">
+                        <h3 class="text-[11px] font-bold uppercase tracking-widest">Classic Noir Shirt</h3>
+                        <span class="text-gray-500 text-xs">280 SAR</span>
+                    </div>
+                </div>
+
+
+                <div class="group product-card">
+                    <div class="aspect-[3/4] bg-[#080808] overflow-hidden mb-6 relative border border-white/5 group-hover:border-white/20 transition-all">
+                        <img src="https://plus.unsplash.com/premium_photo-1671030274122-b6ac34f87b8b?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                            class="product-img w-full h-full object-cover grayscale brightness-50 group-hover:brightness-100 group-hover:grayscale-0 transition-all duration-700">
+                        <button onclick="addToCart(this, 'Dark Wool Coat', 520)" class="glow-button absolute bottom-0 w-full bg-white text-black py-5 text-[10px] font-bold uppercase opacity-0 translate-y-6 group-hover:opacity-100 group-hover:translate-y-0 transition-all">Add to Cart +</button>
+                    </div>
+                    <div class="flex justify-between px-2"><h3 class="text-[11px] font-bold uppercase">Dark Wool Coat</h3><span class="text-gray-500 text-xs">520 SAR</span></div>
+                </div>
+
+                <div class="group product-card">
+                    <div class="aspect-[3/4] bg-[#080808] overflow-hidden mb-6 relative border border-white/5 group-hover:border-white/20 transition-all">
+                        <img src="https://plus.unsplash.com/premium_photo-1724519180161-fb1bcfee8af5?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="product-img w-full h-full object-cover grayscale brightness-50 group-hover:brightness-100 group-hover:grayscale-0 transition-all duration-700">
+                        <button onclick="addToCart(this, 'Green Shirt', 390)" class="glow-button absolute bottom-0 w-full bg-white text-black py-5 text-[10px] font-bold uppercase opacity-0 translate-y-6 group-hover:opacity-100 group-hover:translate-y-0 transition-all">Add to Cart +</button>
+                    </div>
+                    <div class="flex justify-between px-2"><h3 class="text-[11px] font-bold uppercase"> Green Shirt </h3><span class="text-gray-500 text-xs">390 SAR</span></div>
+                </div>
+
+                <div class="group product-card">
+                    <div class="aspect-[3/4] bg-[#080808] overflow-hidden mb-6 relative border border-white/5 group-hover:border-white/20 transition-all">
+                        <img src="https://plus.unsplash.com/premium_photo-1675107359823-1f91344a2f9f?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="product-img w-full h-full object-cover grayscale brightness-50 group-hover:brightness-100 group-hover:grayscale-0 transition-all duration-700">
+                        <button onclick="addToCart(this, 'Silk Dress', 750)" class="glow-button absolute bottom-0 w-full bg-white text-black py-5 text-[10px] font-bold uppercase opacity-0 translate-y-6 group-hover:opacity-100 group-hover:translate-y-0 transition-all">Add to Cart +</button>
+                    </div>
+                    <div class="flex justify-between px-2"><h3 class="text-[11px] font-bold uppercase">Black Silk Dress</h3><span class="text-gray-500 text-xs">750 SAR</span></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Footer -->
+    <footer class="bg-[#050505] border-t border-white/5 py-20 text-center">
+        <div class="text-2xl font-bold uppercase tracking-tighter mb-4">Minimal.</div>
+        <p class="text-gray-700 text-[9px] uppercase tracking-[0.4em]">© 2026 Black Excellence Edition.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
